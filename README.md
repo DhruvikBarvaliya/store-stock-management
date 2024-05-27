@@ -36,7 +36,7 @@ The Store Stock Management API is a backend system for managing store inventory,
 ### Step 1: Clone the repository
 
 ```bash
-git clone https://github.com/your-username/store-stock-management.git
+git clone https://github.com/DhruvikBarvaliya/store-stock-management.git
 cd store-stock-management
 
 #bash
@@ -61,23 +61,74 @@ store-stock-management/
 ├── services/
 │   ├── auth/
 │   │   ├── controllers/
+│   │   │   └── authController.js
 │   │   ├── models/
+│   │   │   └── User.js
 │   │   ├── routes/
+│   │   │   └── authRoutes.js
 │   │   ├── services/
 │   │   └── index.js
 │   ├── inventory/
 │   │   ├── controllers/
+│   │   │   └── inventoryController.js
 │   │   ├── models/
+│   │   │   └── InventoryItem.js
 │   │   ├── routes/
+│   │   │   └── inventoryRoutes.js
 │   │   ├── services/
 │   │   └── index.js
-│   └── ...
+│   ├── requisitions/
+│   │   ├── controllers/
+│   │   │   └── requisitionsController.js
+│   │   ├── models/
+│   │   │   └── Requisition.js
+│   │   ├── routes/
+│   │   │   └── requisitionsRoutes.js
+│   │   ├── services/
+│   │   └── index.js
+│   ├── purchase-orders/
+│   │   ├── controllers/
+│   │   │   └── purchaseOrdersController.js
+│   │   ├── models/
+│   │   │   └── PurchaseOrder.js
+│   │   ├── routes/
+│   │   │   └── purchaseOrdersRoutes.js
+│   │   ├── services/
+│   │   └── index.js
+│   ├── gate-pass/
+│   │   ├── controllers/
+│   │   │   └── gatePassController.js
+│   │   ├── models/
+│   │   │   └── GatePass.js
+│   │   ├── routes/
+│   │   │   └── gatePassRoutes.js
+│   │   ├── services/
+│   │   └── index.js
+│   ├── documents/
+│   │   ├── controllers/
+│   │   │   └── documentsController.js
+│   │   ├── models/
+│   │   │   └── Document.js
+│   │   ├── routes/
+│   │   │   └── documentsRoutes.js
+│   │   ├── services/
+│   │   └── index.js
+│   └── stores/
+│       ├── controllers/
+│       │   └── storesController.js
+│       ├── models/
+│       │   └── Store.js
+│       ├── routes/
+│       │   └── storesRoutes.js
+│       ├── services/
+│       └── index.js
 ├── config/
 │   ├── database.js
-│   └── swagger.js
+│   ├── swagger.js
+│   └── logger.js
 ├── logs/
+│   ├── error.log
+│   └── combined.log
 ├── .env
 ├── app.js
 └── package.json
-
-
