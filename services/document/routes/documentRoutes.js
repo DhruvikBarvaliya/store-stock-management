@@ -1,112 +1,164 @@
-
 const express = require('express');
-const documentController = require('../controllers/documentController');
 const router = express.Router();
-const fileUpload = require('express-fileupload');
-
-router.use(fileUpload());
-
-/**
- * @swagger
- * components:
- * schemas:
- * Document:
- * type: object
- * required:
- * - name
- * - path
- * properties:
- * id:
- * type: string
- * description: The auto-generated ID of the document
- * name:
- * type: string
- * description: The name of the document
- * path:
- * type: string
- * description: The path to the document file
- * example:
- * name: sample.docx
- * path: /path/to/sample.docx
- */
+const documentController = require('../controllers/documentController');
 
 /**
  * @swagger
  * tags:
  * name: Documents
- * description: API endpoints for managing documents
+ * description: Documents management
  */
 
 /**
  * @swagger
- * /api/documents:
+ * /documents:
  * post:
- * summary: Upload a document
+ * summary: Create a new document
  * tags: [Documents]
  * requestBody:
  * required: true
  * content:
- * multipart/form-data:
- * schema:
- * type: object
- * properties:
- * document:
- * type: string
- * format: binary
- * responses:
- * 201:
- * description: Document uploaded successfully
- * content:
  * application/json:
  * schema:
- * $ref: '#/components/schemas/Document'
+ * type: object
+ * required:
+ * - title
+ * - description
+ * - filePath
+ * properties:
+ * title:
+ * type: string
+ * description:
+ * type: string
+ * filePath:
+ * type: string
+ * responses:
+ * 201:
+ * description: The document was created successfully
  * 500:
- * description: Internal server error
+ * description: Some server error
  */
-router.post('/', documentController.uploadDocument);
+router.post('/', documentController.createDocument);
 
 /**
  * @swagger
- * /api/documents:
+ * /documents:
  * get:
  * summary: Get all documents
  * tags: [Documents]
  * responses:
  * 200:
- * description: List of documents
+ * description: List of all documents
  * content:
  * application/json:
  * schema:
  * type: array
  * items:
- * $ref: '#/components/schemas/Document'
+ * type: object
+ * properties:
+ * id:
+ * type: integer
+ * title:
+ * type: string
+ * description:
+ * type: string
+ * filePath:
+ * type: string
  * 500:
- * description: Internal server error
+ * description: Some server error
  */
-router.get('/', documentController.getDocuments);
+router.get('/', documentController.getAllDocuments);
+
+/**
+ * @swagger
+ * /documents/{id}:
+ * get:
+ * summary: Get a document by ID
+ * tags: [Documents]
+ * parameters:
+ * - in: path
+ * name: id
+ * required: true
+ * schema:
+ * type: integer
+ * responses:
+ * 200:
+ * description: A document
+ * content:
+ * application/json:
+ * schema:
+ * type: object
+ * properties:
+ * id:
+ * type: integer
+ * title:
+ * type: string
+ * description:
+ * type: string
+ * filePath:
+ * type: string
+ * 404:
+ * description: Document not found
+ * 500:
+ * description: Some server error
+ */
+router.get('/:id', documentController.getDocumentById);
+
+/**
+ * @swagger
+ * /documents/{id}:
+ * put:
+ * summary: Update a document by ID
+ * tags: [Documents]
+ * parameters:
+ * - in: path
+ * name: id
+ * required: true
+ * schema:
+ * type: integer
+ * requestBody:
+ * required: true
+ * content:
+ * application/json:
+ * schema:
+ * type: object
+ * properties:
+ * title:
+ * type: string
+ * description:
+ * type: string
+ * filePath:
+ * type: string
+ * responses:
+ * 200:
+ * description: The document was updated successfully
+ * 404:
+ * description: Document not found
+ * 500:
+ * description: Some server error
+ */
+router.put('/:id', documentController.updateDocument);
+
+/**
+ * @swagger
+ * /documents/{id}:
+ * delete:
+ * summary: Delete a document by ID
+ * tags: [Documents]
+ * parameters:
+ * - in: path
+ * name: id
+ * required: true
+ * schema:
+ * type: integer
+ * responses:
+ * 204:
+ * description: The document was deleted successfully
+ * 404:
+ * description: Document not found
+ * 500:
+ * description: Some server error
+ */
+router.delete('/:id', documentController.deleteDocument);
 
 module.exports = router;
-
-
-
-
-
-// services/documents/index.js
-
-const express = require('express');
-const documentRoutes = require('./routes/documentRoutes');
-const logger = require('../../../logs/logger');
-
-const app = express();
-app.use(express.json());
-
-// Routes
-app.use('/api/documents', documentRoutes);
-
-// Error handler
-app.use((err, req, res, next) => {
-    logger.error('Error:', err);
-    res.status(500).json({ error: 'Internal Server Error' });
-});
-
-module.exports = app;

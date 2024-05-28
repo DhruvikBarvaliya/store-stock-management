@@ -1,68 +1,68 @@
-const Requisition = require('../models/requisition');
+const requisitionService = require('../services/requisitionService');
 
-// Create a new requisition
-exports.createRequisition = async (req, res) => {
+const createRequisition = async (req, res, next) => {
     try {
-        const { itemName, quantity, requestedBy } = req.body;
-        const newRequisition = await Requisition.create({ itemName, quantity, requestedBy });
-        res.status(201).json(newRequisition);
+        const data = req.body;
+        const requisition = await requisitionService.createRequisition(data);
+        res.status(201).json(requisition);
     } catch (error) {
-        res.status(500).json({ message: 'Error creating requisition', error });
+        next(error);
     }
 };
 
-// Get all requisitions
-exports.getRequisitions = async (req, res) => {
+const getAllRequisitions = async (req, res, next) => {
     try {
-        const requisitions = await Requisition.findAll();
+        const requisitions = await requisitionService.getAllRequisitions();
         res.status(200).json(requisitions);
     } catch (error) {
-        res.status(500).json({ message: 'Error retrieving requisitions', error });
+        next(error);
     }
 };
 
-// Get a single requisition by ID
-exports.getRequisitionById = async (req, res) => {
+const getRequisitionById = async (req, res, next) => {
     try {
-        const requisition = await Requisition.findByPk(req.params.id);
+        const id = req.params.id;
+        const requisition = await requisitionService.getRequisitionById(id);
         if (!requisition) {
             return res.status(404).json({ message: 'Requisition not found' });
         }
         res.status(200).json(requisition);
     } catch (error) {
-        res.status(500).json({ message: 'Error retrieving requisition', error });
+        next(error);
     }
 };
 
-// Update a requisition by ID
-exports.updateRequisition = async (req, res) => {
+const updateRequisition = async (req, res, next) => {
     try {
-        const { itemName, quantity, requestedBy, status } = req.body;
-        const requisition = await Requisition.findByPk(req.params.id);
-        if (!requisition) {
+        const id = req.params.id;
+        const data = req.body;
+        const updatedRequisition = await requisitionService.updateRequisition(id, data);
+        if (!updatedRequisition) {
             return res.status(404).json({ message: 'Requisition not found' });
         }
-        requisition.itemName = itemName;
-        requisition.quantity = quantity;
-        requisition.requestedBy = requestedBy;
-        requisition.status = status;
-        await requisition.save();
-        res.status(200).json(requisition);
+        res.status(200).json(updatedRequisition);
     } catch (error) {
-        res.status(500).json({ message: 'Error updating requisition', error });
+        next(error);
     }
 };
 
-// Delete a requisition by ID
-exports.deleteRequisition = async (req, res) => {
+const deleteRequisition = async (req, res, next) => {
     try {
-        const requisition = await Requisition.findByPk(req.params.id);
-        if (!requisition) {
+        const id = req.params.id;
+        const deleted = await requisitionService.deleteRequisition(id);
+        if (!deleted) {
             return res.status(404).json({ message: 'Requisition not found' });
         }
-        await requisition.destroy();
-        res.status(204).json({ message: 'Requisition deleted' });
+        res.status(204).json();
     } catch (error) {
-        res.status(500).json({ message: 'Error deleting requisition', error });
+        next(error);
     }
+};
+
+module.exports = {
+    createRequisition,
+    getAllRequisitions,
+    getRequisitionById,
+    updateRequisition,
+    deleteRequisition,
 };

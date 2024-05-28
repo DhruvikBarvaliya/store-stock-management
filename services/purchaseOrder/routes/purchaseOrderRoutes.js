@@ -1,20 +1,20 @@
 const express = require('express');
 const router = express.Router();
-const requisitionController = require('../controllers/requisitionController');
+const purchaseOrderController = require('../controllers/purchaseOrderController');
 
 /**
  * @swagger
  * tags:
- * name: Requisitions
- * description: Requisitions management
+ * name: PurchaseOrders
+ * description: Purchase Orders management
  */
 
 /**
  * @swagger
- * /requisitions:
+ * /purchase-orders:
  * post:
- * summary: Create a new requisition
- * tags: [Requisitions]
+ * summary: Create a new purchase order
+ * tags: [PurchaseOrders]
  * requestBody:
  * required: true
  * content:
@@ -22,14 +22,14 @@ const requisitionController = require('../controllers/requisitionController');
  * schema:
  * type: object
  * required:
- * - requisitionNumber
- * - requester
+ * - orderNumber
+ * - supplier
  * - totalAmount
  * - status
  * properties:
- * requisitionNumber:
+ * orderNumber:
  * type: string
- * requester:
+ * supplier:
  * type: string
  * totalAmount:
  * type: number
@@ -38,21 +38,21 @@ const requisitionController = require('../controllers/requisitionController');
  * type: string
  * responses:
  * 201:
- * description: The requisition was created successfully
+ * description: The purchase order was created successfully
  * 500:
  * description: Some server error
  */
-router.post('/', requisitionController.createRequisition);
+router.post('/', purchaseOrderController.createPurchaseOrder);
 
 /**
  * @swagger
- * /requisitions:
+ * /purchase-orders:
  * get:
- * summary: Get all requisitions
- * tags: [Requisitions]
+ * summary: Get all purchase orders
+ * tags: [PurchaseOrders]
  * responses:
  * 200:
- * description: List of all requisitions
+ * description: List of all purchase orders
  * content:
  * application/json:
  * schema:
@@ -62,9 +62,9 @@ router.post('/', requisitionController.createRequisition);
  * properties:
  * id:
  * type: integer
- * requisitionNumber:
+ * orderNumber:
  * type: string
- * requester:
+ * supplier:
  * type: string
  * totalAmount:
  * type: number
@@ -74,14 +74,14 @@ router.post('/', requisitionController.createRequisition);
  * 500:
  * description: Some server error
  */
-router.get('/', requisitionController.getAllRequisitions);
+router.get('/', purchaseOrderController.getAllPurchaseOrders);
 
 /**
  * @swagger
- * /requisitions/{id}:
+ * /purchase-orders/{id}:
  * get:
- * summary: Get a requisition by ID
- * tags: [Requisitions]
+ * summary: Get a purchase order by ID
+ * tags: [PurchaseOrders]
  * parameters:
  * - in: path
  * name: id
@@ -90,7 +90,7 @@ router.get('/', requisitionController.getAllRequisitions);
  * type: integer
  * responses:
  * 200:
- * description: A requisition
+ * description: A purchase order
  * content:
  * application/json:
  * schema:
@@ -98,9 +98,9 @@ router.get('/', requisitionController.getAllRequisitions);
  * properties:
  * id:
  * type: integer
- * requisitionNumber:
+ * orderNumber:
  * type: string
- * requester:
+ * supplier:
  * type: string
  * totalAmount:
  * type: number
@@ -108,18 +108,18 @@ router.get('/', requisitionController.getAllRequisitions);
  * status:
  * type: string
  * 404:
- * description: Requisition not found
+ * description: Purchase Order not found
  * 500:
  * description: Some server error
  */
-router.get('/:id', requisitionController.getRequisitionById);
+router.get('/:id', purchaseOrderController.getPurchaseOrderById);
 
 /**
  * @swagger
- * /requisitions/{id}:
+ * /purchase-orders/{id}:
  * put:
- * summary: Update a requisition by ID
- * tags: [Requisitions]
+ * summary: Update a purchase order by ID
+ * tags: [PurchaseOrders]
  * parameters:
  * - in: path
  * name: id
@@ -133,9 +133,9 @@ router.get('/:id', requisitionController.getRequisitionById);
  * schema:
  * type: object
  * properties:
- * requisitionNumber:
+ * orderNumber:
  * type: string
- * requester:
+ * supplier:
  * type: string
  * totalAmount:
  * type: number
@@ -144,20 +144,20 @@ router.get('/:id', requisitionController.getRequisitionById);
  * type: string
  * responses:
  * 200:
- * description: The requisition was updated successfully
+ * description: The purchase order was updated successfully
  * 404:
- * description: Requisition not found
+ * description: Purchase Order not found
  * 500:
  * description: Some server error
  */
-router.put('/:id', requisitionController.updateRequisition);
+router.put('/:id', purchaseOrderController.updatePurchaseOrder);
 
 /**
  * @swagger
- * /requisitions/{id}:
+ * /purchase-orders/{id}:
  * delete:
- * summary: Delete a requisition by ID
- * tags: [Requisitions]
+ * summary: Delete a purchase order by ID
+ * tags: [PurchaseOrders]
  * parameters:
  * - in: path
  * name: id
@@ -166,12 +166,12 @@ router.put('/:id', requisitionController.updateRequisition);
  * type: integer
  * responses:
  * 204:
- * description: The requisition was deleted successfully
+ * description: The purchase order was deleted successfully
  * 404:
- * description: Requisition not found
+ * description: Purchase Order not found
  * 500:
  * description: Some server error
  */
-router.delete('/:id', requisitionController.deleteRequisition);
+router.delete('/:id', purchaseOrderController.deletePurchaseOrder);
 
 module.exports = router;

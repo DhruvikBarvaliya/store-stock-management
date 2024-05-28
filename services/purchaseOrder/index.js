@@ -1,5 +1,7 @@
-const inventoryRoutes = require('./routes/inventoryRoutes');
+const express = require('express');
+const router = express.Router();
+const purchaseOrderRoutes = require('./routes/purchaseOrderRoutes');
 
-module.exports = {
-    inventoryRoutes
-};
+router.use('/purchase-orders', purchaseOrderRoutes);
+
+module.exports = router;

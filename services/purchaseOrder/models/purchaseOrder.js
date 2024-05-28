@@ -1,19 +1,23 @@
 const { DataTypes } = require('sequelize');
 const sequelize = require('../../../config/database');
 
-const Inventory = sequelize.define('Inventory', {
-    itemName: {
+const PurchaseOrder = sequelize.define('PurchaseOrder', {
+    orderNumber: {
         type: DataTypes.STRING,
         allowNull: false,
     },
-    quantity: {
-        type: DataTypes.INTEGER,
+    supplier: {
+        type: DataTypes.STRING,
         allowNull: false,
     },
-    location: {
+    totalAmount: {
+        type: DataTypes.FLOAT,
+        allowNull: false,
+    },
+    status: {
         type: DataTypes.STRING,
         allowNull: false,
     },
 });
 
-module.exports = Inventory;
+module.exports = PurchaseOrder;

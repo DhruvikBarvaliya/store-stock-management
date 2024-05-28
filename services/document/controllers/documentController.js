@@ -1,42 +1,68 @@
-const fs = require('fs');
-const path = require('path');
-const Document = require('../models/Document');
-const logger = require('../../../logs/logger');
+const documentService = require('../services/documentService');
 
-exports.uploadDocument = async (req, res) => {
+const createDocument = async (req, res, next) => {
     try {
-        if (!req.files || Object.keys(req.files).length === 0) {
-            return res.status(400).json({ error: 'No files were uploaded.' });
-        }
-
-        const file = req.files.document;
-        const uploadDir = path.join(__dirname, '../../../uploads');
-
-        if (!fs.existsSync(uploadDir)) {
-            fs.mkdirSync(uploadDir);
-        }
-
-        const fileName = `${Date.now()}_${file.name}`;
-        const filePath = path.join(uploadDir, fileName);
-
-        await file.mv(filePath);
-
-        const document = await Document.create({ name: file.name, path: filePath });
-        logger.info(`Document uploaded: ${document.name}`);
-
+        const data = req.body;
+        const document = await documentService.createDocument(data);
         res.status(201).json(document);
     } catch (error) {
-        logger.error('Error uploading document:', error);
-        res.status(500).json({ error: 'Internal Server Error' });
+        next(error);
     }
 };
 
-exports.getDocuments = async (req, res) => {
+const getAllDocuments = async (req, res, next) => {
     try {
-        const documents = await Document.findAll();
-        res.json(documents);
+        const documents = await documentService.getAllDocuments();
+        res.status(200).json(documents);
     } catch (error) {
-        logger.error('Error fetching documents:', error);
-        res.status(500).json({ error: 'Internal Server Error' });
+        next(error);
     }
+};
+
+const getDocumentById = async (req, res, next) => {
+    try {
+        const id = req.params.id;
+        const document = await documentService.getDocumentById(id);
+        if (!document) {
+            return res.status(404).json({ message: 'Document not found' });
+        }
+        res.status(200).json(document);
+    } catch (error) {
+        next(error);
+    }
+};
+
+const updateDocument = async (req, res, next) => {
+    try {
+        const id = req.params.id;
+        const data = req.body;
+        const updatedDocument = await documentService.updateDocument(id, data);
+        if (!updatedDocument) {
+            return res.status(404).json({ message: 'Document not found' });
+        }
+        res.status(200).json(updatedDocument);
+    } catch (error) {
+        next(error);
+    }
+};
+
+const deleteDocument = async (req, res, next) => {
+    try {
+        const id = req.params.id;
+        const deleted = await documentService.deleteDocument(id);
+        if (!deleted) {
+            return res.status(404).json({ message: 'Document not found' });
+        }
+        res.status(204).json();
+    } catch (error) {
+        next(error);
+    }
+};
+
+module.exports = {
+    createDocument,
+    getAllDocuments,
+    getDocumentById,
+    updateDocument,
+    deleteDocument,
 };

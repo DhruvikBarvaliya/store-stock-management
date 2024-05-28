@@ -8,10 +8,10 @@ const winston = require('winston');
 require('dotenv').config();
 const authRoutes = require('./services/auth/routes/authRoutes');
 const inventoryRoutes = require('./services/inventory/routes/inventoryRoutes');
-const requisitionRoutes = require('./services/requisitions/routes/requisitionRoutes');
-const purchaseOrderRoutes = require('./services/purchaseOrders/routes/purchaseOrderRoutes');
+const requisitionRoutes = require('./services/requisition/routes/requisitionRoutes');
+const purchaseOrderRoutes = require('./services/purchaseOrder/routes/purchaseOrderRoutes');
 const gatePassRoutes = require('./services/gatePass/routes/gatePassRoutes');
-const documentRoutes = require('./services/documents/routes/documentRoutes');
+const documentRoutes = require('./services/document/routes/documentRoutes');
 const storeRoutes = require('./services/store/routes/storeRoutes');
 
 

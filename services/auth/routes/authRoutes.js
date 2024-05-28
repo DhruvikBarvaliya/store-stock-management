@@ -4,44 +4,14 @@ const authController = require('../controllers/authController');
 
 /**
  * @swagger
- * components:
- * schemas:
- * User:
- * type: object
- * required:
- * - username
- * - email
- * - password
- * properties:
- * id:
- * type: integer
- * description: The auto-generated id of the user
- * username:
- * type: string
- * description: The username of the user
- * email:
- * type: string
- * description: The email of the user
- * password:
- * type: string
- * description: The password of the user
- * example:
- * id: 1
- * username: john_doe
- * email: john@example.com
- * password: password123
- */
-
-/**
- * @swagger
  * tags:
  * name: Auth
- * description: The authentication API
+ * description: Authentication and user management
  */
 
 /**
  * @swagger
- * /api/auth/register:
+ * /auth/register:
  * post:
  * summary: Register a new user
  * tags: [Auth]
@@ -50,14 +20,18 @@ const authController = require('../controllers/authController');
  * content:
  * application/json:
  * schema:
- * $ref: '#/components/schemas/User'
+ * type: object
+ * required:
+ * - username
+ * - password
+ * properties:
+ * username:
+ * type: string
+ * password:
+ * type: string
  * responses:
  * 201:
- * description: The user was successfully created
- * content:
- * application/json:
- * schema:
- * $ref: '#/components/schemas/User'
+ * description: User registered successfully
  * 500:
  * description: Some server error
  */
@@ -65,7 +39,7 @@ router.post('/register', authController.register);
 
 /**
  * @swagger
- * /api/auth/login:
+ * /auth/login:
  * post:
  * summary: Login a user
  * tags: [Auth]
@@ -75,56 +49,40 @@ router.post('/register', authController.register);
  * application/json:
  * schema:
  * type: object
+ * required:
+ * - username
+ * - password
  * properties:
- * email:
+ * username:
  * type: string
  * password:
  * type: string
- * example:
- * email: john@example.com
- * password: password123
  * responses:
  * 200:
- * description: The user was successfully logged in
- * content:
- * application/json:
- * schema:
- * type: object
- * properties:
- * token:
- * type: string
- * 404:
- * description: User not found
+ * description: User logged in successfully
  * 401:
- * description: Invalid password
+ * description: Invalid credentials
  * 500:
  * description: Some server error
  */
 router.post('/login', authController.login);
 
+/**
+ * @swagger
+ * /auth/authenticate:
+ * get:
+ * summary: Authenticate a user
+ * tags: [Auth]
+ * security:
+ * - bearerAuth: []
+ * responses:
+ * 200:
+ * description: User authenticated successfully
+ * 401:
+ * description: Invalid token
+ * 500:
+ * description: Some server error
+ */
+router.get('/authenticate', authController.authenticate);
+
 module.exports = router;
-
-
-
-
-// services/auth/middleware/authMiddleware.js
-
-const jwt = require('jsonwebtoken');
-require('dotenv').config();
-
-module.exports = (req, res, next) => {
-    const token = req.headers['authorization'];
-
-    if (!token) {
-        return res.status(403).json({ message: 'No token provided' });
-    }
-
-    jwt.verify(token.split(' ')[1], process.env.JWT_SECRET, (err, decoded) => {
-        if (err) {
-            return res.status(500).json({ message: 'Failed to authenticate token' });
-        }
-
-        req.userId = decoded.id;
-        next();
-    });
-};

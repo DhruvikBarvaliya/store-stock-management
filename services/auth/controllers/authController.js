@@ -1,35 +1,38 @@
-const bcrypt = require('bcrypt');
-const jwt = require('jsonwebtoken');
-const User = require('../models/user');
-require('dotenv').config();
+const authService = require('../services/authService');
 
-// Register a new user
-exports.register = async (req, res) => {
+const register = async (req, res, next) => {
     try {
-        const { username, email, password } = req.body;
-        const hashedPassword = await bcrypt.hash(password, 10);
-        const newUser = await User.create({ username, email, password: hashedPassword });
-        res.status(201).json(newUser);
+        const { username, password } = req.body;
+        const user = await authService.register(username, password);
+        res.status(201).json({ id: user.id, username: user.username });
     } catch (error) {
-        res.status(500).json({ message: 'Error registering user', error });
+        next(error);
     }
 };
 
-// Login a user
-exports.login = async (req, res) => {
+const login = async (req, res, next) => {
     try {
-        const { email, password } = req.body;
-        const user = await User.findOne({ where: { email } });
-        if (!user) {
-            return res.status(404).json({ message: 'User not found' });
-        }
-        const isPasswordValid = await bcrypt.compare(password, user.password);
-        if (!isPasswordValid) {
-            return res.status(401).json({ message: 'Invalid password' });
-        }
-        const token = jwt.sign({ id: user.id }, process.env.JWT_SECRET, { expiresIn: '1h' });
+        const { username, password } = req.body;
+        const token = await authService.login(username, password);
         res.status(200).json({ token });
     } catch (error) {
-        res.status(500).json({ message: 'Error logging in', error });
+        next(error);
     }
 };
+
+const authenticate = async (req, res, next) => {
+    try {
+        const token = req.headers.authorization.split(' ')[1];
+        const user = await authService.authenticate(token);
+        res.status(200).json(user);
+    } catch (error) {
+        next(error);
+    }
+};
+
+module.exports = {
+    register,
+    login,
+    authenticate,
+};
+

@@ -1,19 +1,19 @@
 const { DataTypes } = require('sequelize');
 const sequelize = require('../../../config/database');
 
-const InventoryItem = sequelize.define('InventoryItem', {
-    name: {
+const GatePass = sequelize.define('GatePass', {
+    material: {
         type: DataTypes.STRING,
-        allowNull: false
+        allowNull: false,
     },
     quantity: {
         type: DataTypes.INTEGER,
-        allowNull: false
+        allowNull: false,
     },
-    location: {
+    issuedBy: {
         type: DataTypes.STRING,
-        allowNull: false
-    }
+        allowNull: false,
+    },
 });
 
-module.exports = InventoryItem;
+module.exports = GatePass;

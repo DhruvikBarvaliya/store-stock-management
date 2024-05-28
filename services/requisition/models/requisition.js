@@ -2,22 +2,22 @@ const { DataTypes } = require('sequelize');
 const sequelize = require('../../../config/database');
 
 const Requisition = sequelize.define('Requisition', {
-    itemName: {
+    requisitionNumber: {
         type: DataTypes.STRING,
-        allowNull: false
+        allowNull: false,
     },
-    quantity: {
-        type: DataTypes.INTEGER,
-        allowNull: false
-    },
-    requestedBy: {
+    requester: {
         type: DataTypes.STRING,
-        allowNull: false
+        allowNull: false,
+    },
+    totalAmount: {
+        type: DataTypes.FLOAT,
+        allowNull: false,
     },
     status: {
-        type: DataTypes.ENUM('pending', 'approved', 'rejected'),
-        defaultValue: 'pending'
-    }
+        type: DataTypes.STRING,
+        allowNull: false,
+    },
 });
 
 module.exports = Requisition;
