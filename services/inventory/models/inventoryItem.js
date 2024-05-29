@@ -14,6 +14,10 @@ const Inventory = sequelize.define('Inventory', {
         type: DataTypes.STRING,
         allowNull: false,
     },
+    status: {
+        type: DataTypes.STRING,
+        allowNull: false,
+    },
 });
 
 module.exports = Inventory;

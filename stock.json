@@ -1,0 +1,825 @@
+{
+  "info": {
+    "name": "Store Stock Management API",
+    "description": "API for Store Stock Management Application",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "GatePass",
+      "item": [
+        {
+          "name": "Create GatePass",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"passNumber\": \"GP123\",\n  \"vehicleNumber\": \"VH456\",\n  \"driverName\": \"John Doe\",\n  \"issueDate\": \"2023-05-28\",\n  \"status\": \"Issued\"\n}"
+            },
+            "url": {
+              "raw": "http://localhost:3000/gatePasses",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "3000",
+              "path": [
+                "gatePasses"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get All GatePasses",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "http://localhost:3000/gatePasses",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "3000",
+              "path": [
+                "gatePasses"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get GatePass by ID",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "http://localhost:3000/gatePasses/:id",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "3000",
+              "path": [
+                "gatePasses",
+                ":id"
+              ],
+              "variable": [
+                {
+                  "key": "id",
+                  "value": "1"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Update GatePass",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"passNumber\": \"GP123\",\n  \"vehicleNumber\": \"VH456\",\n  \"driverName\": \"Jane Doe\",\n  \"issueDate\": \"2023-05-28\",\n  \"status\": \"Completed\"\n}"
+            },
+            "url": {
+              "raw": "http://localhost:3000/gatePasses/:id",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "3000",
+              "path": [
+                "gatePasses",
+                ":id"
+              ],
+              "variable": [
+                {
+                  "key": "id",
+                  "value": "1"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Delete GatePass",
+          "request": {
+            "method": "DELETE",
+            "url": {
+              "raw": "http://localhost:3000/gatePasses/:id",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "3000",
+              "path": [
+                "gatePasses",
+                ":id"
+              ],
+              "variable": [
+                {
+                  "key": "id",
+                  "value": "1"
+                }
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Inventory",
+      "item": [
+        {
+          "name": "Create Inventory",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"itemName\": \"Item1\",\n  \"quantity\": 100,\n  \"location\": \"Warehouse1\"\n}"
+            },
+            "url": {
+              "raw": "http://localhost:3000/inventory",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "3000",
+              "path": [
+                "inventory"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get All Inventory",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "http://localhost:3000/inventory",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "3000",
+              "path": [
+                "inventory"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get Inventory by ID",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "http://localhost:3000/inventory/:id",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "3000",
+              "path": [
+                "inventory",
+                ":id"
+              ],
+              "variable": [
+                {
+                  "key": "id",
+                  "value": "1"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Update Inventory",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"itemName\": \"Item1\",\n  \"quantity\": 200,\n  \"location\": \"Warehouse1\"\n}"
+            },
+            "url": {
+              "raw": "http://localhost:3000/inventory/:id",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "3000",
+              "path": [
+                "inventory",
+                ":id"
+              ],
+              "variable": [
+                {
+                  "key": "id",
+                  "value": "1"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Delete Inventory",
+          "request": {
+            "method": "DELETE",
+            "url": {
+              "raw": "http://localhost:3000/inventory/:id",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "3000",
+              "path": [
+                "inventory",
+                ":id"
+              ],
+              "variable": [
+                {
+                  "key": "id",
+                  "value": "1"
+                }
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "PurchaseOrder",
+      "item": [
+        {
+          "name": "Create PurchaseOrder",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"orderNumber\": \"PO123\",\n  \"supplier\": \"Supplier1\",\n  \"orderDate\": \"2023-05-28\",\n  \"status\": \"Pending\"\n}"
+            },
+            "url": {
+              "raw": "http://localhost:3000/purchaseOrders",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "3000",
+              "path": [
+                "purchaseOrders"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get All PurchaseOrders",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "http://localhost:3000/purchaseOrders",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "3000",
+              "path": [
+                "purchaseOrders"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get PurchaseOrder by ID",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "http://localhost:3000/purchaseOrders/:id",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "3000",
+              "path": [
+                "purchaseOrders",
+                ":id"
+              ],
+              "variable": [
+                {
+                  "key": "id",
+                  "value": "1"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Update PurchaseOrder",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"orderNumber\": \"PO123\",\n  \"supplier\": \"Supplier1\",\n  \"orderDate\": \"2023-05-28\",\n  \"status\": \"Completed\"\n}"
+            },
+            "url": {
+              "raw": "http://localhost:3000/purchaseOrders/:id",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "3000",
+              "path": [
+                "purchaseOrders",
+                ":id"
+              ],
+              "variable": [
+                {
+                  "key": "id",
+                  "value": "1"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Delete PurchaseOrder",
+          "request": {
+            "method": "DELETE",
+            "url": {
+              "raw": "http://localhost:3000/purchaseOrders/:id",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "3000",
+              "path": [
+                "purchaseOrders",
+                ":id"
+              ],
+              "variable": [
+                {
+                  "key": "id",
+                  "value": "1"
+                }
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Requisition",
+      "item": [
+        {
+          "name": "Create Requisition",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"requisitionNumber\": \"REQ123\",\n  \"requestedBy\": \"User1\",\n  \"requestDate\": \"2023-05-28\",\n  \"status\": \"Pending\"\n}"
+            },
+            "url": {
+              "raw": "http://localhost:3000/requisitions",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "3000",
+              "path": [
+                "requisitions"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get All Requisitions",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "http://localhost:3000/requisitions",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "3000",
+              "path": [
+                "requisitions"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get Requisition by ID",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "http://localhost:3000/requisitions/:id",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "3000",
+              "path": [
+                "requisitions",
+                ":id"
+              ],
+              "variable": [
+                {
+                  "key": "id",
+                  "value": "1"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Update Requisition",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"requisitionNumber\": \"REQ123\",\n  \"requestedBy\": \"User1\",\n  \"requestDate\": \"2023-05-28\",\n  \"status\": \"Approved\"\n}"
+            },
+            "url": {
+              "raw": "http://localhost:3000/requisitions/:id",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "3000",
+              "path": [
+                "requisitions",
+                ":id"
+              ],
+              "variable": [
+                {
+                  "key": "id",
+                  "value": "1"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Delete Requisition",
+          "request": {
+            "method": "DELETE",
+            "url": {
+              "raw": "http://localhost:3000/requisitions/:id",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "3000",
+              "path": [
+                "requisitions",
+                ":id"
+              ],
+              "variable": [
+                {
+                  "key": "id",
+                  "value": "1"
+                }
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Store",
+      "item": [
+        {
+          "name": "Create Store",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"storeName\": \"Store1\",\n  \"location\": \"Location1\"\n}"
+            },
+            "url": {
+              "raw": "http://localhost:3000/stores",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "3000",
+              "path": [
+                "stores"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get All Stores",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "http://localhost:3000/stores",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "3000",
+              "path": [
+                "stores"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get Store by ID",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "http://localhost:3000/stores/:id",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "3000",
+              "path": [
+                "stores",
+                ":id"
+              ],
+              "variable": [
+                {
+                  "key": "id",
+                  "value": "1"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Update Store",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"storeName\": \"Store1\",\n  \"location\": \"Location2\"\n}"
+            },
+            "url": {
+              "raw": "http://localhost:3000/stores/:id",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "3000",
+              "path": [
+                "stores",
+                ":id"
+              ],
+              "variable": [
+                {
+                  "key": "id",
+                  "value": "1"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Delete Store",
+          "request": {
+            "method": "DELETE",
+            "url": {
+              "raw": "http://localhost:3000/stores/:id",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "3000",
+              "path": [
+                "stores",
+                ":id"
+              ],
+              "variable": [
+                {
+                  "key": "id",
+                  "value": "1"
+                }
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Document",
+      "item": [
+        {
+          "name": "Create Document",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"documentName\": \"Doc1\",\n  \"documentType\": \"Type1\",\n  \"content\": \"Content of the document\"\n}"
+            },
+            "url": {
+              "raw": "http://localhost:3000/documents",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "3000",
+              "path": [
+                "documents"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get All Documents",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "http://localhost:3000/documents",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "3000",
+              "path": [
+                "documents"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get Document by ID",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "http://localhost:3000/documents/:id",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "3000",
+              "path": [
+                "documents",
+                ":id"
+              ],
+              "variable": [
+                {
+                  "key": "id",
+                  "value": "1"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Update Document",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"documentName\": \"Doc1\",\n  \"documentType\": \"Type1\",\n  \"content\": \"Updated content of the document\"\n}"
+            },
+            "url": {
+              "raw": "http://localhost:3000/documents/:id",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "3000",
+              "path": [
+                "documents",
+                ":id"
+              ],
+              "variable": [
+                {
+                  "key": "id",
+                  "value": "1"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Delete Document",
+          "request": {
+            "method": "DELETE",
+            "url": {
+              "raw": "http://localhost:3000/documents/:id",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "3000",
+              "path": [
+                "documents",
+                ":id"
+              ],
+              "variable": [
+                {
+                  "key": "id",
+                  "value": "1"
+                }
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    }
+  ]
+}

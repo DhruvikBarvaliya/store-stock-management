@@ -2,15 +2,23 @@ const { DataTypes } = require('sequelize');
 const sequelize = require('../../../config/database');
 
 const GatePass = sequelize.define('GatePass', {
-    material: {
+    passNumber: {
         type: DataTypes.STRING,
         allowNull: false,
     },
-    quantity: {
-        type: DataTypes.INTEGER,
+    vehicleNumber: {
+        type: DataTypes.STRING,
         allowNull: false,
     },
-    issuedBy: {
+    driverName: {
+        type: DataTypes.STRING,
+        allowNull: false,
+    },
+    issueDate: {
+        type: DataTypes.DATE,
+        allowNull: false,
+    },
+    status: {
         type: DataTypes.STRING,
         allowNull: false,
     },
