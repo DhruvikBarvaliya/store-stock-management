@@ -4,183 +4,171 @@ const gatePassController = require("../controllers/gatePassController");
 
 /**
  * @swagger
+ * components:
+ *   schemas:
+ *     GatePass:
+ *       type: object
+ *       required:
+ *         - gatePassNumber
+ *         - vehicleNumber
+ *         - issuedBy
+ *         - issueDate
+ *       properties:
+ *         id:
+ *           type: integer
+ *           description: The auto-generated ID of the gate pass
+ *         gatePassNumber:
+ *           type: string
+ *           description: The gate pass number
+ *         vehicleNumber:
+ *           type: string
+ *           description: The vehicle number
+ *         issuedBy:
+ *           type: string
+ *           description: The person who issued the gate pass
+ *         issueDate:
+ *           type: string
+ *           format: date
+ *           description: The date when the gate pass was issued
+ *         status:
+ *           type: string
+ *           description: The status of the gate pass
+ *       example:
+ *         id: 1
+ *         gatePassNumber: GP123
+ *         vehicleNumber: ABC123
+ *         issuedBy: User1
+ *         issueDate: 2023-05-28
+ *         status: Pending
+ */
+
+/**
+ * @swagger
  * tags:
- * name: GatePass
- * description: GatePass management
+ *   name: GatePasses
+ *   description: The gate pass managing API
  */
 
 /**
  * @swagger
  * /gatePasses:
- * post:
- * summary: Create a new gate pass
- * tags: [GatePass]
- * requestBody:
- * required: true
- * content:
- * application/json:
- * schema:
- * type: object
- * required:
- * - passNumber
- * - vehicleNumber
- * - driverName
- * - issueDate
- * - status
- * properties:
- * passNumber:
- * type: string
- * vehicleNumber:
- * type: string
- * driverName:
- * type: string
- * issueDate:
- * type: string
- * format: date
- * status:
- * type: string
- * responses:
- * 201:
- * description: The gate pass was created successfully
- * 500:
- * description: Some server error
+ *   post:
+ *     summary: Create a new gate pass
+ *     tags: [GatePasses]
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             $ref: '#/components/schemas/GatePass'
+ *     responses:
+ *       201:
+ *         description: The gate pass was successfully created
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/GatePass'
+ *       500:
+ *         description: Some server error
  */
-router.post('/', gatePassController.createGatePass);
+router.post("/", gatePassController.createGatePass);
 
 /**
  * @swagger
  * /gatePasses:
- * get:
- * summary: Get all gate passes
- * tags: [GatePass]
- * responses:
- * 200:
- * description: List of all gate passes
- * content:
- * application/json:
- * schema:
- * type: array
- * items:
- * type: object
- * properties:
- * id:
- * type: integer
- * passNumber:
- * type: string
- * vehicleNumber:
- * type: string
- * driverName:
- * type: string
- * issueDate:
- * type: string
- * format: date
- * status:
- * type: string
- * 500:
- * description: Some server error
+ *   get:
+ *     summary: Get all gate passes
+ *     tags: [GatePasses]
+ *     responses:
+ *       200:
+ *         description: List of all gate passes
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: array
+ *               items:
+ *                 $ref: '#/components/schemas/GatePass'
  */
-router.get('/', gatePassController.getAllGatePasses);
+router.get("/", gatePassController.getAllGatePasses);
 
 /**
  * @swagger
  * /gatePasses/{id}:
- * get:
- * summary: Get a gate pass by ID
- * tags: [GatePass]
- * parameters:
- * - in: path
- * name: id
- * required: true
- * schema:
- * type: integer
- * responses:
- * 200:
- * description: A gate pass
- * content:
- * application/json:
- * schema:
- * type: object
- * properties:
- * id:
- * type: integer
- * passNumber:
- * type: string
- * vehicleNumber:
- * type: string
- * driverName:
- * type: string
- * issueDate:
- * type: string
- * format: date
- * status:
- * type: string
- * 404:
- * description: Gate pass not found
- * 500:
- * description: Some server error
+ *   get:
+ *     summary: Get a gate pass by ID
+ *     tags: [GatePasses]
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         schema:
+ *           type: integer
+ *         required: true
+ *         description: The gate pass ID
+ *     responses:
+ *       200:
+ *         description: The gate pass description by ID
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/GatePass'
+ *       404:
+ *         description: The gate pass was not found
  */
-router.get('/:id', gatePassController.getGatePassById);
+router.get("/:id", gatePassController.getGatePassById);
 
 /**
  * @swagger
  * /gatePasses/{id}:
- * put:
- * summary: Update a gate pass by ID
- * tags: [GatePass]
- * parameters:
- * - in: path
- * name: id
- * required: true
- * schema:
- * type: integer
- * requestBody:
- * required: true
- * content:
- * application/json:
- * schema:
- * type: object
- * properties:
- * passNumber:
- * type: string
- * vehicleNumber:
- * type: string
- * driverName:
- * type: string
- * issueDate:
- * type: string
- * format: date
- * status:
- * type: string
- * responses:
- * 200:
- * description: The gate pass was updated successfully
- * 404:
- * description: Gate pass not found
- * 500:
- * description: Some server error
+ *   put:
+ *     summary: Update a gate pass by ID
+ *     tags: [GatePasses]
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         schema:
+ *           type: integer
+ *         required: true
+ *         description: The gate pass ID
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             $ref: '#/components/schemas/GatePass'
+ *     responses:
+ *       200:
+ *         description: The gate pass was successfully updated
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/GatePass'
+ *       404:
+ *         description: The gate pass was not found
+ *       500:
+ *         description: Some server error
  */
-router.put('/:id', gatePassController.updateGatePass);
+router.put("/:id", gatePassController.updateGatePass);
 
 /**
  * @swagger
  * /gatePasses/{id}:
- * delete:
- * summary: Delete a gate pass by ID
- * tags: [GatePass]
- * parameters:
- * - in: path
- * name: id
- * required: true
- * schema:
- * type: integer
- * responses:
- * 204:
- * description: The gate pass was deleted successfully
- * 404:
- * description: Gate pass not found
- * 500:
- * description: Some server error
+ *   delete:
+ *     summary: Delete a gate pass by ID
+ *     tags: [GatePasses]
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         schema:
+ *           type: integer
+ *         required: true
+ *         description: The gate pass ID
+ *     responses:
+ *       200:
+ *         description: The gate pass was deleted
+ *       404:
+ *         description: The gate pass was not found
+ *       500:
+ *         description: Some server error
  */
-
-router.delete('/:id', gatePassController.deleteGatePass);
+router.delete("/:id", gatePassController.deleteGatePass);
 module.exports = router;
