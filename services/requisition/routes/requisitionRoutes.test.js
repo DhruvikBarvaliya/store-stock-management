@@ -1,14 +1,14 @@
 const request = require('supertest');
 const express = require('express');
 const bodyParser = require('body-parser');
-const { Requisition } = require('../models');
+const { Requisition } = require('../models/requisition');
 const requisitionRoutes = require('./requisitionRoutes');
 
 const app = express();
 app.use(bodyParser.json());
 app.use('/requisitions', requisitionRoutes);
 
-jest.mock('../models');
+jest.mock('../models/requisition');
 
 describe('Requisition Routes', () => {
   let mockRequisitions;

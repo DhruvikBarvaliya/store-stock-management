@@ -1,14 +1,14 @@
 const request = require("supertest");
 const express = require("express");
 const bodyParser = require("body-parser");
-const { PurchaseOrder } = require("../models");
+const { PurchaseOrder } = require("../models/purchaseOrder");
 const purchaseOrderRoutes = require("./purchaseOrderRoutes");
 
 const app = express();
 app.use(bodyParser.json());
 app.use("/purchase-orders", purchaseOrderRoutes);
 
-jest.mock("../models");
+jest.mock("../models/purchaseOrder");
 
 describe("Purchase Order Routes", () => {
   let mockPurchaseOrders;

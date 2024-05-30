@@ -1,14 +1,14 @@
 const request = require('supertest');
 const express = require('express');
 const bodyParser = require('body-parser');
-const { GatePass } = require('../models');
+const { GatePass } = require('../models/gatePass');
 const gatePassRoutes = require('./gatePassRoutes');
 
 const app = express();
 app.use(bodyParser.json());
 app.use('/gatePass', gatePassRoutes);
 
-jest.mock('../models');
+jest.mock('../models/gatePass');
 
 describe('GatePass Routes', () => {
   let mockGatePasses;

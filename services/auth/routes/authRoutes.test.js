@@ -3,14 +3,14 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
-const { User } = require('../models');
+const { User } = require('../models/user');
 const authRoutes = require('./authRoutes');
 
 const app = express();
 app.use(bodyParser.json());
 app.use('/auth', authRoutes);
 
-jest.mock('../models');
+jest.mock('../models/user');
 jest.mock('bcrypt');
 jest.mock('jsonwebtoken');
 

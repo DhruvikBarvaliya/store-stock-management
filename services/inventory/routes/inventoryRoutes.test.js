@@ -1,14 +1,14 @@
 const request = require('supertest');
 const express = require('express');
 const bodyParser = require('body-parser');
-const { Inventory } = require('../models');
+const { Inventory } = require('../models/inventory');
 const inventoryRoutes = require('./inventoryRoutes');
 
 const app = express();
 app.use(bodyParser.json());
 app.use('/inventory', inventoryRoutes);
 
-jest.mock('../models');
+jest.mock('../models/inventory');
 
 describe('Inventory Routes', () => {
   let mockInventories;

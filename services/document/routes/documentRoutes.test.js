@@ -1,14 +1,14 @@
 const request = require('supertest');
 const express = require('express');
 const bodyParser = require('body-parser');
-const { Document } = require('../models');
+const { Document } = require('../models/document');
 const documentRoutes = require('./documentRoutes');
 
 const app = express();
 app.use(bodyParser.json());
 app.use('/documents', documentRoutes);
 
-jest.mock('../models');
+jest.mock('../models/document');
 
 describe('Document Routes', () => {
   let mockDocuments;
